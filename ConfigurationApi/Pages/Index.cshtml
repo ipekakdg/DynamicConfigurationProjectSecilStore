@@ -14,20 +14,19 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
-            background-color: #000000;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #333333;
         }
 
         header {
-            background-color: #111111;
+            background-color: #f8f8f8;
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #ddd;
         }
 
             header img {
-                height: 30px;
-                width: 30px;
+                height: 70px;
                 vertical-align: middle;
             }
 
@@ -36,22 +35,32 @@
                 margin: 0 10px;
                 font-size: 22px;
                 vertical-align: middle;
-                font-weight: normal;
-                color: #ffffff;
+                color: #444444;
+                font-weight: 500;
             }
 
         .content {
-            padding: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #444;
+            font-size: 20px;
         }
 
         input[type="text"],
         input[type="checkbox"] {
             padding: 10px;
-            margin: 5px;
-            border: 1px solid #555;
-            border-radius: 5px;
-            background-color: #111;
-            color: #fff;
+            margin: 5px 10px 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
         }
 
         form {
@@ -60,55 +69,62 @@
 
         button {
             padding: 10px 20px;
-            background-color: #444;
+            background-color: #555;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
         }
 
             button:hover {
-                background-color: #666;
+                background-color: #777;
             }
+
+        #search {
+            width: 100%;
+            margin-bottom: 15px;
+        }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 15px;
-            border: 1px solid white;
+            margin-top: 10px;
+            font-size: 14px;
         }
 
         th, td {
             padding: 12px;
-            border: 1px solid white;
+            border: 1px solid #ddd;
             text-align: left;
         }
 
         th {
-            background-color: #222;
-            color: #e4e4e4;
+            background-color: #f0f0f0;
+            color: #333;
         }
 
         td {
-            background-color: #1a1a1a;
-            color: #d1d1d1;
+            background-color: #ffffff;
+            color: #555;
         }
 
         tr:hover td {
-            background-color: #2a2a2a;
+            background-color: #f9f9f9;
         }
 
         footer {
             margin-top: 50px;
             text-align: center;
             font-size: 13px;
-            color: #888;
+            color: #006400;
         }
     </style>
 </head>
 <body>
 
     <header>
+        <img src="~/images/secil-logo-black.png" alt="Seçil Logo" />
+        <h1> | Config Panel</h1>
     </header>
 
     <div class="content">

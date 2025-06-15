@@ -1,0 +1,188 @@
+﻿@page
+
+@model ConfigurationApi.Pages.IndexModel
+@{
+    ViewData["Title"] = "Seçil Store | Config Panel";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        header {
+            background-color: #111111;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+            header img {
+                height: 30px;
+                width: 30px;
+                vertical-align: middle;
+            }
+
+            header h1 {
+                display: inline-block;
+                margin: 0 10px;
+                font-size: 22px;
+                vertical-align: middle;
+                font-weight: normal;
+                color: #ffffff;
+            }
+
+        .content {
+            padding: 30px;
+        }
+
+        input[type="text"],
+        input[type="checkbox"] {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #111;
+            color: #fff;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #666;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            border: 1px solid white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid white;
+            text-align: left;
+        }
+
+        th {
+            background-color: #222;
+            color: #e4e4e4;
+        }
+
+        td {
+            background-color: #1a1a1a;
+            color: #d1d1d1;
+        }
+
+        tr:hover td {
+            background-color: #2a2a2a;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+    </header>
+
+    <div class="content">
+        <h2>Yeni Ayar Ekle</h2>
+
+        <form method="post" action="?handler=Add">
+            @Html.AntiForgeryToken()
+
+            <input type="text" name="NewConfig.Name" placeholder="Name" required />
+            <input type="text" name="NewConfig.Type" placeholder="Type" required />
+            <input type="text" name="NewConfig.Value" placeholder="Value" required />
+            <input type="text" name="NewConfig.ApplicationName" placeholder="Application Name" required />
+            <label>
+                <input type="checkbox" name="NewConfig.IsActive" value="true" />
+                Aktif mi?
+            </label>
+            <button type="submit">➕ Ekle</button>
+        </form>
+
+        <input type="text" id="search" placeholder="Ayarlarda ara..." onkeyup="filterTable()" />
+
+        <table id="configTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Application</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Configs)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Type</td>
+                        <td>@item.Value</td>
+                        <td>@item.ApplicationName</td>
+                        <td>
+                            <form method="post" action="?handler=Delete">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="Id" value="@item.Id" />
+                                <button type="submit">🗑</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        Protected by İpek Akdağ © @DateTime.Now.Year
+    </footer>
+
+    <script>
+        function filterTable() {
+            var input = document.getElementById("search");
+            var filter = input.value.toLowerCase();
+            var rows = document.querySelectorAll("#configTable tbody tr");
+
+            rows.forEach(row => {
+                var nameCell = row.cells[4].textContent.toLowerCase();
+                if (nameCell.indexOf(filter) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
